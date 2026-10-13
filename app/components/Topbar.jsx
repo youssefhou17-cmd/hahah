@@ -18,7 +18,7 @@ export default function Topbar() {
           </a>
           <div className={`navlinks ${menuOpen ? 'open' : ''}`}>
             <a href="/#home" onClick={closeMenu}>Home page</a>
-            <a href="/#services" onClick={closeMenu}>Services</a>
+            <a href="#streaming-cards" onClick={closeMenu}>Services</a>
             <a href="/#pricing" onClick={closeMenu}>Pricing & Packages</a>
             <a href="/#devices" onClick={closeMenu}>Blog</a>
             <a href="/about" onClick={closeMenu}>About</a>

@@ -1317,3 +1317,11 @@
 }
 
 
+
+/* Mobile pricing anchor: scroll past the section heading so device tabs + first plan card are both in view */
+@media (max-width: 700px) {
+  #pricing {
+    scroll-margin-top: -194px;
+  }
+}
+
