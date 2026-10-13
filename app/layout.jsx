@@ -3,7 +3,7 @@ import './content.css';
 import './testimonials.css';
 
 export const metadata = {
-  title: 'On the Go | Streaming Provider',
+  title: 'GoSharkTV | Streaming Provider',
   description: 'Worldwide streaming, available on every screen.'
 };
 

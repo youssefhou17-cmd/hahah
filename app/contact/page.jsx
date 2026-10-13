@@ -25,7 +25,7 @@ const contactChannels = [
     title: 'Email Support',
     text: 'Send us the details of your question or issue and we will reply with a full answer within hours.',
     cta: 'Send an Email',
-    href: 'mailto:support@optictv.online'
+    href: 'mailto:support@gosharktv.com'
   },
   {
     icon: questionIcon,

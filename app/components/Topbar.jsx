@@ -14,7 +14,7 @@ export default function Topbar() {
       <div className="wrap">
         <nav>
           <a className="brand" href="/#home" onClick={closeMenu}>
-            <i />On the <span>Go</span>
+            <i />GoShark<span>TV</span>
           </a>
           <div className={`navlinks ${menuOpen ? 'open' : ''}`}>
             <a href="/#home" onClick={closeMenu}>Home page</a>
