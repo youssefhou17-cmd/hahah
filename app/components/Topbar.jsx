@@ -14,7 +14,12 @@ export default function Topbar() {
       <div className="wrap">
         <nav>
           <a className="brand" href="/#home" onClick={closeMenu}>
-            <i />GoShark<span>TV</span>
+            <img
+              className="brand-logo"
+              src="/devices/originals/LOGO%20GOSHARKTV.png"
+              alt="GoSharkTV"
+            />
+            <span className="brand-text"><i />GoShark<span>TV</span></span>
           </a>
           <div className={`navlinks ${menuOpen ? 'open' : ''}`}>
             <a href="/#home" onClick={closeMenu}>Home page</a>

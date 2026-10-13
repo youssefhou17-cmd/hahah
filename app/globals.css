@@ -1325,3 +1325,19 @@
   }
 }
 
+/* Topbar brand: text logo on desktop, image logo on mobile */
+.brand-logo {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .brand-logo {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+  .brand-text {
+    display: none;
+  }
+}
+
