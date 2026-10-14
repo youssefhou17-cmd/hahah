@@ -875,11 +875,13 @@
   position: absolute;
   inset: 0;
   transition: opacity 0.25s ease;
-  opacity: 1;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.vf-card.vf-fading {
-  opacity: 0.2;
+.vf-card.vf-active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .vf-card video {

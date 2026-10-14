@@ -42,31 +42,16 @@ const slides = [
 
 export default function VideoSlider() {
   const [active, setActive] = useState(0);
-  const [isFading, setIsFading] = useState(false);
-  const videoRef = useRef(null);
   const activeRef = useRef(0);
+  const videoRefs = useRef([]);
+  const readyRef = useRef({});        // index -> true once the clip is buffered enough to play
+  const pendingRef = useRef(false);   // a flip is waiting for its video to finish buffering
+  const pendingTargetRef = useRef(null);
   activeRef.current = active;
-
-  const goTo = (nextIndex) => {
-    if (nextIndex === activeRef.current || isFading) return;
-    setIsFading(true);
-
-    setTimeout(() => {
-      setActive(nextIndex);
-      activeRef.current = nextIndex;
-      setIsFading(false);
-    }, 250);
-  };
-
-  const advance = () => {
-    const next = (activeRef.current + 1) % slides.length;
-    goTo(next);
-  };
 
   // iOS-safe playback: play() is only called once the element is in the DOM and
   // has buffered data. Calling it in a ref callback gets rejected by Safari.
-  const tryPlay = () => {
-    const vid = videoRef.current;
+  const tryPlay = (vid) => {
     if (!vid) return;
     vid.muted = true;
     vid.defaultMuted = true;
@@ -75,34 +60,70 @@ export default function VideoSlider() {
     if (p && typeof p.catch === 'function') p.catch(() => {});
   };
 
+  const commitTo = (nextIndex) => {
+    if (nextIndex === activeRef.current) return;
+    pendingRef.current = false;
+    pendingTargetRef.current = null;
+    setActive(nextIndex);
+    activeRef.current = nextIndex;
+  };
+
+  // Only flip once the incoming video is actually buffered. iOS Safari buffers
+  // videos on demand and ignores preload for videos that aren't playing, so
+  // flipping early shows the grey stage until the clip finally loads.
+  const requestGo = (nextIndex) => {
+    if (nextIndex === activeRef.current) return;
+    if (readyRef.current[nextIndex]) {
+      commitTo(nextIndex);
+    } else {
+      pendingRef.current = true;
+      pendingTargetRef.current = nextIndex;
+      const vid = videoRefs.current[nextIndex];
+      if (vid) { try { vid.load(); } catch (e) {} }
+    }
+  };
+
+  const advance = () => requestGo((activeRef.current + 1) % slides.length);
+
   // Safari blocks autoplay in Low Power Mode until a user gesture happens,
   // so one tap anywhere is enough to wake the slider up.
   useEffect(() => {
-    const onFirstTouch = () => tryPlay();
+    const onFirstTouch = () => tryPlay(videoRefs.current[activeRef.current]);
     document.addEventListener('touchend', onFirstTouch, { once: true });
     return () => document.removeEventListener('touchend', onFirstTouch);
   }, []);
 
-  // Advance when the current video ends; the duration-based fallback covers
-  // iOS builds where the ended event can be missed.
+  // Play the active clip, pause the others, and proactively buffer the NEXT one
+  // ahead of time so the following flip is instant (no grey flash on iOS).
   useEffect(() => {
-    const vid = videoRef.current;
-    if (!vid) return;
+    const currentVid = videoRefs.current[active];
     let fallback;
 
+    if (currentVid && readyRef.current[active]) tryPlay(currentVid);
+
+    videoRefs.current.forEach((vid, i) => {
+      if (vid && i !== active && !vid.paused) vid.pause();
+    });
+
+    const next = (active + 1) % slides.length;
+    const nextVid = videoRefs.current[next];
+    if (nextVid && !readyRef.current[next]) { try { nextVid.load(); } catch (e) {} }
+
+    // Backup timer in case the 'ended' event is missed on some iOS builds.
     const armFallback = () => {
       clearTimeout(fallback);
-      if (isFinite(vid.duration) && vid.duration > 0) {
-        fallback = setTimeout(advance, vid.duration * 1000 + 400);
+      if (currentVid && isFinite(currentVid.duration) && currentVid.duration > 0) {
+        fallback = setTimeout(advance, currentVid.duration * 1000 + 500);
       }
     };
-
-    if (vid.readyState >= 1) armFallback();
-    vid.addEventListener('loadedmetadata', armFallback);
+    if (currentVid) {
+      if (currentVid.readyState >= 1) armFallback();
+      currentVid.addEventListener('loadedmetadata', armFallback);
+    }
 
     return () => {
-      vid.removeEventListener('loadedmetadata', armFallback);
       clearTimeout(fallback);
+      if (currentVid) currentVid.removeEventListener('loadedmetadata', armFallback);
     };
   }, [active]);
 
@@ -115,25 +136,49 @@ export default function VideoSlider() {
       role="region"
       aria-label="Trending content video slider"
     >
-      <div className={`vf-card vf-active ${isFading ? 'vf-fading' : ''}`}>
-        <video
-          key={currentSlide.src}
-          ref={videoRef}
-          src={currentSlide.src}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          onCanPlay={tryPlay}
-          onLoadedData={tryPlay}
-          onEnded={advance}
-          onError={() => setTimeout(advance, 1200)}
-        />
-        <div className="vf-caption">
-          <h2>{currentSlide.title}</h2>
-          {currentSlide.text && <p>{currentSlide.text}</p>}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.src}
+          className={`vf-card ${index === active ? 'vf-active' : ''}`}
+        >
+          <video
+            ref={(el) => {
+              videoRefs.current[index] = el;
+            }}
+            src={slide.src}
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            onLoadedData={(e) => {
+              readyRef.current[index] = true;
+              const vid = e.currentTarget;
+              if (index === activeRef.current) {
+                tryPlay(vid);
+              } else if (pendingRef.current && index === pendingTargetRef.current) {
+                commitTo(index);
+              }
+            }}
+            onCanPlay={(e) => {
+              readyRef.current[index] = true;
+              if (index === activeRef.current) tryPlay(e.currentTarget);
+            }}
+            onEnded={() => {
+              if (index === activeRef.current) advance();
+            }}
+            onError={() => {
+              if (pendingRef.current && index === pendingTargetRef.current) {
+                commitTo(index); // self-heals: as the active clip its own onError advances on
+              } else if (index === activeRef.current) {
+                setTimeout(advance, 1200);
+              }
+            }}
+          />
         </div>
+      ))}
+      <div className="vf-caption">
+        <h2>{currentSlide.title}</h2>
+        {currentSlide.text && <p>{currentSlide.text}</p>}
       </div>
       <div className="vf-dots">
         {slides.map((slide, index) => (
@@ -144,7 +189,7 @@ export default function VideoSlider() {
             className={index === active ? 'vf-dot vf-dot-active' : 'vf-dot'}
             onClick={(e) => {
               e.stopPropagation();
-              goTo(index);
+              requestGo(index);
             }}
           />
         ))}
