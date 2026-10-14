@@ -1331,21 +1331,29 @@
   }
 }
 
-/* Topbar brand: text logo on desktop, image logo on mobile */
+/* Topbar brand: desktop logo image on desktop, original logo on mobile */
 .brand-logo {
+  display: none;
+}
+.brand-logo-desktop {
+  display: block;
+  height: 46px;
+  width: auto;
+}
+.brand-text {
   display: none;
 }
 
 @media (max-width: 700px) {
-  .brand-logo {
+  .brand-logo-desktop {
+    display: none;
+  }
+  .brand-logo-mobile {
     display: block;
     height: 80px;
     width: auto;
     margin-left: 8px;
     margin-top: 18px;
-  }
-  .brand-text {
-    display: none;
   }
 }
 

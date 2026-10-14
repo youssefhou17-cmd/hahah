@@ -15,7 +15,12 @@ export default function Topbar() {
         <nav>
           <a className="brand" href="/#home" onClick={closeMenu}>
             <img
-              className="brand-logo"
+              className="brand-logo brand-logo-desktop"
+              src="/devices/originals/LOGO%20GOSHARKTV%20DESKTOP.png"
+              alt="GoSharkTV"
+            />
+            <img
+              className="brand-logo brand-logo-mobile"
               src="/devices/originals/LOGO%20GOSHARKTV.png"
               alt="GoSharkTV"
             />
