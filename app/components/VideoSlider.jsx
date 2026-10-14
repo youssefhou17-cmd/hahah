@@ -40,8 +40,6 @@ const slides = [
   }
 ];
 
-const SLIDE_DURATION_MS = 5000;
-
 export default function VideoSlider() {
   const [active, setActive] = useState(0);
   const [isFading, setIsFading] = useState(false);
@@ -65,23 +63,47 @@ export default function VideoSlider() {
     goTo(next);
   };
 
-  // Ensure video plays when active slide changes
+  // iOS-safe playback: play() is only called once the element is in the DOM and
+  // has buffered data. Calling it in a ref callback gets rejected by Safari.
+  const tryPlay = () => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.defaultMuted = true;
+    vid.playsInline = true;
+    const p = vid.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+
+  // Safari blocks autoplay in Low Power Mode until a user gesture happens,
+  // so one tap anywhere is enough to wake the slider up.
+  useEffect(() => {
+    const onFirstTouch = () => tryPlay();
+    document.addEventListener('touchend', onFirstTouch, { once: true });
+    return () => document.removeEventListener('touchend', onFirstTouch);
+  }, []);
+
+  // Advance when the current video ends; the duration-based fallback covers
+  // iOS builds where the ended event can be missed.
   useEffect(() => {
     const vid = videoRef.current;
-    if (vid) {
-      vid.muted = true;
-      vid.defaultMuted = true;
-      vid.playsInline = true;
-      vid.currentTime = 0;
-      const p = vid.play();
-      if (p && typeof p.catch === 'function') p.catch(() => {});
-    }
+    if (!vid) return;
+    let fallback;
 
-    const timer = setTimeout(() => {
-      advance();
-    }, SLIDE_DURATION_MS);
+    const armFallback = () => {
+      clearTimeout(fallback);
+      if (isFinite(vid.duration) && vid.duration > 0) {
+        fallback = setTimeout(advance, vid.duration * 1000 + 400);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    if (vid.readyState >= 1) armFallback();
+    vid.addEventListener('loadedmetadata', armFallback);
+
+    return () => {
+      vid.removeEventListener('loadedmetadata', armFallback);
+      clearTimeout(fallback);
+    };
   }, [active]);
 
   const currentSlide = slides[active];
@@ -96,25 +118,17 @@ export default function VideoSlider() {
       <div className={`vf-card vf-active ${isFading ? 'vf-fading' : ''}`}>
         <video
           key={currentSlide.src}
-          ref={(el) => {
-            if (el) {
-              el.muted = true;
-              el.defaultMuted = true;
-              el.playsInline = true;
-              el.setAttribute('playsinline', '');
-              el.setAttribute('webkit-playsinline', '');
-              const p = el.play();
-              if (p && typeof p.catch === 'function') p.catch(() => {});
-            }
-            videoRef.current = el;
-          }}
+          ref={videoRef}
           src={currentSlide.src}
           autoPlay
           muted
-          loop
           playsInline
           preload="auto"
+          disablePictureInPicture
+          onCanPlay={tryPlay}
+          onLoadedData={tryPlay}
           onEnded={advance}
+          onError={() => setTimeout(advance, 1200)}
         />
         <div className="vf-caption">
           <h2>{currentSlide.title}</h2>
