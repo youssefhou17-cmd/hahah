@@ -6,11 +6,11 @@ export const metadata = {
   description: 'Get in touch with the GoSharkTV team.'
 };
 
-const whatsappIcon = <img src="/icons/Whatsapp%20logo.png" alt="" aria-hidden="true" style={{ display: 'block', width: '38px', height: '38px', objectFit: 'contain' }} />;
+const whatsappIcon = <img src="/icons/Whatsapp%20logo.webp" alt="" aria-hidden="true" style={{ display: 'block', width: '38px', height: '38px', objectFit: 'contain' }} />;
 
 const mailIcon = <img src="/icons/mail.webp" alt="" aria-hidden="true" style={{ display: 'block', width: '30px', height: '30px', objectFit: 'contain' }} />;
 
-const questionIcon = <img src="/icons/question.png" alt="" aria-hidden="true" style={{ display: 'block', width: '30px', height: '30px', objectFit: 'contain' }} />;
+const questionIcon = <img src="/icons/question.webp" alt="" aria-hidden="true" style={{ display: 'block', width: '30px', height: '30px', objectFit: 'contain' }} />;
 
 const contactChannels = [
   {

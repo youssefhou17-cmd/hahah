@@ -16,17 +16,17 @@ const aboutStats = [
 
 const aboutOffers = [
   {
-    icon: '/icons/tv%20icon.png',
+    icon: '/icons/tv%20icon.webp',
     title: 'Live TV & Sports',
     text: '55,000+ international channels with every live match, league, and tournament in smooth HD and 4K quality.'
   },
   {
-    icon: '/icons/play.png',
+    icon: '/icons/play.webp',
     title: 'Movies & Series',
     text: '240,000+ titles on demand: blockbusters, trending shows, and kids\' favorites, ready whenever you are.'
   },
   {
-    icon: '/icons/Chip.png',
+    icon: '/icons/Chip.webp',
     title: 'Anti-Freeze 8.0',
     text: 'Our own technology built for buffer-free streaming, backed by a support team that never sleeps.'
   }
