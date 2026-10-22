@@ -13,7 +13,7 @@ const deviceLogos = [
   ['New Project 2.webp', 'Apple TV'], ['New Project.webp', 'Fire TV']
 ];
 
-const payLogos = ['Visa', 'Mastercard', 'American express', 'Discover (1)', 'Apple pay', 'Gpay', 'amazon pay'];
+const payLogos = ['Visa', 'Mastercard', 'American express', 'Discover', 'Apple pay', 'Gpay', 'amazon pay'];
 
 const plans = [
   ['12 Months', '$80', '365 Days', 'Annual plan'],

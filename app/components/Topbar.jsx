@@ -16,12 +16,12 @@ export default function Topbar() {
           <a className="brand" href="/#home" onClick={closeMenu}>
             <img
               className="brand-logo brand-logo-desktop"
-              src="/devices/originals/LOGO%20GOSHARKTV%20DESKTOP.webp"
+              src="/devices/LOGO%20GOSHARKTV%20DESKTOP.webp"
               alt="GoSharkTV"
             />
             <img
               className="brand-logo brand-logo-mobile"
-              src="/devices/originals/LOGO%20GOSHARKTV.webp"
+              src="/devices/LOGO%20GOSHARKTV.webp"
               alt="GoSharkTV"
             />
             <span className="brand-text"><i />GoShark<span>TV</span></span>
