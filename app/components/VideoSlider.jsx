@@ -85,6 +85,15 @@ export default function VideoSlider() {
 
   const advance = () => requestGo((activeRef.current + 1) % slides.length);
 
+  // Load the first video on mount. preload="none" means the browser fetches no
+  // data until .load() is called, so we start the stream explicitly here.
+  useEffect(() => {
+    const firstVid = videoRefs.current[0];
+    if (firstVid) {
+      try { firstVid.load(); } catch (e) {}
+    }
+  }, []);
+
   // Safari blocks autoplay in Low Power Mode until a user gesture happens,
   // so one tap anywhere is enough to wake the slider up.
   useEffect(() => {
@@ -107,7 +116,8 @@ export default function VideoSlider() {
 
     const next = (active + 1) % slides.length;
     const nextVid = videoRefs.current[next];
-    if (nextVid && !readyRef.current[next]) { try { nextVid.load(); } catch (e) {} }
+    // load() is handled by requestGo() when the user actually navigates to a slide.
+    // Removing this proactive call prevents downloading the next clip before it is needed.
 
     // Backup timer in case the 'ended' event is missed on some iOS builds.
     const armFallback = () => {
@@ -148,7 +158,7 @@ export default function VideoSlider() {
             src={slide.src}
             muted
             playsInline
-            preload="auto"
+            preload="none"
             disablePictureInPicture
             onLoadedData={(e) => {
               readyRef.current[index] = true;
