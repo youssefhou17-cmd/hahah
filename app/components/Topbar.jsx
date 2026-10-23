@@ -21,7 +21,7 @@ export default function Topbar() {
             />
             <img
               className="brand-logo brand-logo-mobile"
-              src="/devices/LOGO%20GOSHARKTV.webp"
+              src="/devices/LOGO%20GOSHARKTV%20(1).webp"
               alt="GoSharkTV"
             />
             <span className="brand-text"><i />GoShark<span>TV</span></span>
