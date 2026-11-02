@@ -675,6 +675,7 @@
 
   .reference-footer-brand {
     width: 100%;
+    order: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -693,6 +694,7 @@
 
   .reference-footer-column {
     min-width: 120px;
+    order: 1;
   }
 
   .reference-footer-column:first-child {
