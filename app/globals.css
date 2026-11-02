@@ -600,13 +600,13 @@
   flex-shrink: 0;
   object-fit: contain;
   display: block;
-  margin-top: -4px;
+  margin-top: -5px;
   margin-left: -6px;
 }
 
 .reference-footer-address {
-  margin: 0;
-  color: #b3b3b3;
+  margin: 24px 0 0;
+  color: #817d7d;
   font-size: 14px;
   font-weight: 400;
   font-style: normal;
