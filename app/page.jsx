@@ -10,7 +10,8 @@ const deviceLogos = [
   ['New Project 9.webp', 'Hisense'], ['New Project 8.webp', 'Roku TV'],
   ['New Project 7.webp', 'Google TV'], ['New Project 5.webp', 'Android TV'],
   ['New Project (1).webp', 'LG'], ['New Project 3.webp', 'Samsung Smart TV'],
-  ['New Project 2.webp', 'Apple TV'], ['New Project.webp', 'Fire TV']
+  ['New Project 2.webp', 'Apple TV'], ['New Project.webp', 'Fire TV'],
+  ['Magbox.webp', 'Magbox'], ['Formuler.webp', 'Formuler']
 ];
 
 const payLogos = ['Visa', 'Mastercard', 'American express', 'Discover', 'Apple pay', 'Gpay', 'amazon pay'];
