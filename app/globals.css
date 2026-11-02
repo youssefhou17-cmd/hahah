@@ -590,7 +590,7 @@
   align-items: flex-start;
   margin-top: -26px;
   margin-left: -12px;
-  gap: 6px;
+  gap: 3px;
 }
 
 .reference-footer-logo {
@@ -605,7 +605,7 @@
 }
 
 .reference-footer-address {
-  margin: 24px 0 0;
+  margin: 8px 0 0;
   color: #8f8c8c;
   font-size: 14px;
   font-weight: 400;
@@ -684,7 +684,7 @@
     margin-top: -12px;
     margin-left: 0;
     margin-bottom: 8px;
-    gap: 6px;
+    gap: 3px;
   }
 
   .reference-footer-logo {
