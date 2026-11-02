@@ -644,7 +644,7 @@
 }
 
 .reference-footer-bottom {
-  padding: 20px 0 24px;
+  padding: 16px 0 20px;
   border-top: 1px solid #2a2a2a;
   color: #858585;
   text-align: center;
@@ -668,7 +668,7 @@
     justify-content: center;
     gap: 36px 48px;
     min-height: 0;
-    padding-bottom: 48px;
+    padding-bottom: 24px;
     width: 100%;
     margin-inline: auto;
   }
@@ -717,7 +717,7 @@
   }
 
   .reference-footer-bottom {
-    padding: 18px 0 22px;
+    padding: 12px 0 16px;
     font-size: 12px;
   }
 }
