@@ -46,7 +46,7 @@ export default function Blog() {
                     <span className="blog-card-meta">{article.date} · {article.readTime}</span>
                     <h3 className="blog-card-title">{article.title}</h3>
                     <p className="blog-card-excerpt">{article.excerpt}</p>
-                    <a href="#contact" className="blog-card-cta">Read more →</a>
+                    <a className="blog-card-cta">Read more →</a>
                   </div>
                 </article>
               ))}
