@@ -30,7 +30,7 @@ export default function SiteFooter() {
           </div>
           <div className="reference-footer-column">
             <h2>Community</h2>
-            <a href="#contact">Blog</a>
+            <a href="/blog">Blog</a>
             <a href="#contact">Instagram</a>
             <a href="#contact">YouTube</a>
             <a href="#contact">Reddit</a>
