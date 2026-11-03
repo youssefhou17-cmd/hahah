@@ -12,6 +12,7 @@ const blogArticles = [
     title: 'How to Setup GoSharkTV on Any Device in 5 Minutes',
     date: 'Oct 22, 2026',
     readTime: '5 min read',
+    href: '/blog/setup-guide',
     excerpt: 'Step-by-step guide to installing GoSharkTV on Smart TV, Firestick, Android, iOS, and PC. Get streaming fast with our easy setup instructions and 24/7 support.'
   },
   {
@@ -19,6 +20,7 @@ const blogArticles = [
     title: 'Best Sports Channels to Watch on GoSharkTV in 2026',
     date: 'Oct 18, 2026',
     readTime: '4 min read',
+    href: '/blog/best-sports-channels',
     excerpt: 'From live football to NBA, UFC, and F1 — discover the top sports channels available on GoSharkTV and never miss a match again.'
   }
 ];
@@ -46,7 +48,7 @@ export default function Blog() {
                     <span className="blog-card-meta">{article.date} · {article.readTime}</span>
                     <h3 className="blog-card-title">{article.title}</h3>
                     <p className="blog-card-excerpt">{article.excerpt}</p>
-                    <a href="#contact" className="blog-card-cta">Read more →</a>
+                    <a href={article.href} className="blog-card-cta">Read more →</a>
                   </div>
                 </article>
               ))}
