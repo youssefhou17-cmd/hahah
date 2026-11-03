@@ -19,7 +19,7 @@ const blogArticles = [
     title: 'Best Sports Channels to Watch on GoSharkTV in 2026',
     date: 'Oct 18, 2026',
     readTime: '4 min read',
-    excerpt: 'From live football to NBA, UFC, and F1 — discover the top sports channels available on GoSharkTV and never miss a match again.'
+    excerpt: 'From live football to Basketball, Boxing, College football, and F1 — discover the top sports channels available on GoSharkTV and never miss a match again.'
   }
 ];
 
