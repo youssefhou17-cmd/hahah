@@ -4,7 +4,7 @@ import './testimonials.css';
 
 const baseUrl = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3000'
-  : 'https://optictv.online';
+  : 'https://gosharktv.com';
 
 export const metadata = {
   title: 'GoSharkTV │ Best IPTV Service │ NO Buffering',
@@ -15,9 +15,14 @@ export const metadata = {
     canonical: '/eng'
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-icon.png',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
 };
 
