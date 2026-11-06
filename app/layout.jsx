@@ -11,9 +11,6 @@ export const metadata = {
   description:
     'GoSharkTV – Enjoy premium IPTV streaming with thousands of 4K/FHD live TV channels, movies, and TV shows. Discover smooth streaming, sports, and entertainment with no buffering.',
   metadataBase: new URL(baseUrl),
-  alternates: {
-    canonical: '/eng'
-  },
   icons: {
     icon: [
       { url: '/favicon.ico' },

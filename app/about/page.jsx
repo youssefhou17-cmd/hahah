@@ -4,7 +4,10 @@ import VideoSlider from '../components/VideoSlider';
 
 export const metadata = {
   title: 'About | GoSharkTV',
-  description: 'Learn more about GoSharkTV: our story, mission, and what makes us different.'
+  description: 'Learn more about GoSharkTV: our story, mission, and what makes us different.',
+  alternates: {
+    canonical: '/about'
+  }
 };
 
 const aboutStats = [

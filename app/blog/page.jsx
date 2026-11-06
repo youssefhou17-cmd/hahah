@@ -3,7 +3,10 @@ import SiteFooter from '../components/SiteFooter';
 
 export const metadata = {
   title: 'Blog | GoSharkTV',
-  description: 'Latest news, guides, and tips about GoSharkTV IPTV streaming service.'
+  description: 'Latest news, guides, and tips about GoSharkTV IPTV streaming service.',
+  alternates: {
+    canonical: '/blog'
+  }
 };
 
 const blogArticles = [

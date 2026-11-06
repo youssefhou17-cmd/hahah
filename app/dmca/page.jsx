@@ -3,7 +3,10 @@ import SiteFooter from '../components/SiteFooter';
 
 export const metadata = {
   title: 'DMCA | GoSharkTV',
-  description: 'GoSharkTV DMCA policy: copyright infringement notification and counter notification procedure.'
+  description: 'GoSharkTV DMCA policy: copyright infringement notification and counter notification procedure.',
+  alternates: {
+    canonical: '/dmca'
+  }
 };
 
 export default function Dmca() {

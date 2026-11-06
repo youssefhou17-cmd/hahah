@@ -3,7 +3,10 @@ import SiteFooter from '../components/SiteFooter';
 
 export const metadata = {
   title: 'Contact | GoSharkTV',
-  description: 'Get in touch with the GoSharkTV team.'
+  description: 'Get in touch with the GoSharkTV team.',
+  alternates: {
+    canonical: '/contact'
+  }
 };
 
 const whatsappIcon = <img src="/icons/Whatsapp%20logo.webp" alt="" aria-hidden="true" style={{ display: 'block', width: '38px', height: '38px', objectFit: 'contain' }} />;

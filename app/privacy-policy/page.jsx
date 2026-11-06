@@ -3,7 +3,10 @@ import SiteFooter from '../components/SiteFooter';
 
 export const metadata = {
   title: 'Privacy Policy | GoSharkTV',
-  description: 'How GoSharkTV collects, uses, and protects your information.'
+  description: 'How GoSharkTV collects, uses, and protects your information.',
+  alternates: {
+    canonical: '/privacy-policy'
+  }
 };
 
 export default function PrivacyPolicy() {
