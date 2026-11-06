@@ -8,7 +8,7 @@ export default function SiteFooter() {
           <div className="reference-footer-brand">
             <Link href="/#home" aria-label="GoSharkTV Home">
               <img
-                src="/devices/coverpng.webp"
+                src="/devices/CoverPNG.webp"
                 alt="GoSharkTV Logo"
                 className="h-12 w-auto shrink-0 object-contain reference-footer-logo"
                 style={{ height: '90px', width: 'auto', flexShrink: 0, objectFit: 'contain', display: 'block' }}

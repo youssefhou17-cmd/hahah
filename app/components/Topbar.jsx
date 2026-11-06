@@ -16,7 +16,7 @@ export default function Topbar() {
           <a className="brand" href="/#home" onClick={closeMenu}>
             <img
               className="brand-logo brand-logo-desktop"
-              src="/devices/coverpng.webp"
+              src="/devices/CoverPNG.webp"
               alt="GoSharkTV"
             />
             <img

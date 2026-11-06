@@ -8,7 +8,7 @@ export const metadata = {
 
 const blogArticles = [
   {
-    image: '/devices/coverpng.webp',
+    image: '/devices/CoverPNG.webp',
     title: 'How to Setup GoSharkTV on Any Device in 5 Minutes',
     date: 'Oct 22, 2026',
     readTime: '5 min read',
