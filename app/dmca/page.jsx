@@ -7,7 +7,7 @@ export const metadata = {
   alternates: {
     canonical: '/dmca'
   },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function Dmca() {

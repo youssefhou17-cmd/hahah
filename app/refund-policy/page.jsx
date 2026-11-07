@@ -7,7 +7,7 @@ export const metadata = {
   alternates: {
     canonical: '/refund-policy'
   },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function RefundPolicy() {
