@@ -2,6 +2,7 @@ import './globals.css';
 import './content.css';
 import './testimonials.css';
 import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const baseUrl = process.env.NODE_ENV === 'development'
   ? 'http://localhost:3000'
@@ -27,6 +28,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <GoogleAnalytics gaId="G-EXDRN84YPX" />
       <head>
         <Script
           strategy="beforeInteractive"
