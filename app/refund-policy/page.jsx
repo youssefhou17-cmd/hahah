@@ -6,7 +6,8 @@ export const metadata = {
   description: 'GoSharkTV refund policy: 7-day money-back guarantee, eligibility criteria and refund process.',
   alternates: {
     canonical: '/refund-policy'
-  }
+  },
+  robots: { index: false, follow: true },
 };
 
 export default function RefundPolicy() {

@@ -6,7 +6,8 @@ export const metadata = {
   description: 'GoSharkTV DMCA policy: copyright infringement notification and counter notification procedure.',
   alternates: {
     canonical: '/dmca'
-  }
+  },
+  robots: { index: false, follow: true },
 };
 
 export default function Dmca() {

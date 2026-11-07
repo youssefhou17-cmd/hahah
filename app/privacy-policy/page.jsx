@@ -6,7 +6,8 @@ export const metadata = {
   description: 'How GoSharkTV collects, uses, and protects your information.',
   alternates: {
     canonical: '/privacy-policy'
-  }
+  },
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPolicy() {
